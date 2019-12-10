@@ -46,10 +46,6 @@ jobs:
           command: yarn build
 
       - run:
-          name: copy assets
-          command: cp -r node_modules/ dist/
-
-      - run:
           name: copy package.json
           command: cp package.json dist/
 
@@ -76,7 +72,7 @@ jobs:
           command: scp -P 3022 -r dist/dist/* $SFTP_USER@$SFTP_HOST:~/projects/site_watcher/notifier
       - run:
           name: start server
-          command: ssh $SFTP_USER@$SFTP_HOST -p 3022 "PATH=$PATH:~/.nvm/versions/node/v10.16.0/bin;cd ~/projects/site_watcher/notifier; pm2 start ecosystem.config.js --only sitewatcher_notifier"
+          command: ssh $SFTP_USER@$SFTP_HOST -p 3022 "PATH=$PATH:~/.nvm/versions/node/v10.16.0/bin;cd ~/projects/site_watcher/notifier; yarn; cd ..; pm2 start ecosystem.config.js --only sitewatcher_notifier"
 
 workflows:
   version: 2
