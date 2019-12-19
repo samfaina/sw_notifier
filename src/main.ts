@@ -10,8 +10,8 @@ const logger = new Logger('Pusher Main');
 const microserviceOptions = {
   transport: Transport.TCP,
   options: {
-    host: '127.0.0.1',
-    port: 8877,
+    host: process.env.SW_PUSH_MICRO_HOST,
+    port: process.env.SW_PUSH_MICRO_PORT,
   },
 };
 
